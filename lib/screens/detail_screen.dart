@@ -27,82 +27,85 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.poketmon.name)),
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.only(
-            top: 10.0,
-            left: 10.0,
-            right: 10.0,
-          ),
-          physics: const ClampingScrollPhysics(),
+        child: Stack(
           children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: Image.asset(
-                widget.poketmon.link,
-                fit: BoxFit.cover,
-              ),
+          ListView(
+            padding: const EdgeInsets.only(
+              top: 10.0,
+              left: 10.0,
+              right: 10.0,
             ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(widget.poketmon.name,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    color: Color(
-                      0xFF777777,
-                    ),
-                  ))
-            ]),
-            Row(
-              children: [
-                IconButton(
-                  padding: EdgeInsets.zero,
-                  icon: const Icon(
-                    Icons.thumbs_up_down_outlined,
-                  ),
-                  onPressed: () {},
+            physics: const ClampingScrollPhysics(),
+            children: [
+              AspectRatio(
+                aspectRatio: 1,
+                child: Image.asset(
+                  widget.poketmon.link,
+                  fit: BoxFit.cover,
                 ),
-                Text(
-                  widget.poketmon.likeCount.toString(),
-                )
-              ],
-            ),
-            Text(
-              "댓글 ${widget.poketmon.replyCount}개",
-            ),
-            ...List.generate(
-              replies.length,
-              (index) => Padding(
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Text(widget.poketmon.name,
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      color: Color(
+                        0xFF777777,
+                      ),
+                    ))
+              ]),
+              Row(
+                children: [
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: const Icon(
+                      Icons.thumbs_up_down_outlined,
+                    ),
+                    onPressed: () {},
+                  ),
+                  Text(
+                    widget.poketmon.likeCount.toString(),
+                  )
+                ],
+              ),
+              Text(
+                "댓글 ${widget.poketmon.replyCount}개",
+              ),
+              ...List.generate(
+                replies.length,
+                (index) => Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10.0,
+                  ),
+                  child: Row(children: [
+                    const Text(
+                      "익명",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.symmetric(horizontal: 3.0)),
+                    Text(
+                      replies[index],
+                    ),
+                  ]),
+                ),
+              ),
+              Padding(
                 padding: const EdgeInsets.only(
                   top: 10.0,
                 ),
-                child: Row(children: [
-                  const Text(
-                    "익명",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                child: Text(
+                  "${widget.poketmon.created.year}년 ${widget.poketmon.created.month}월 ${widget.poketmon.created.day}일",
+                  style: const TextStyle(
+                    color: Color(
+                      0xFFAAAAAA,
                     ),
                   ),
-                  const Padding(padding: EdgeInsets.symmetric(horizontal: 3.0)),
-                  Text(
-                    replies[index],
-                  ),
-                ]),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 10.0,
-              ),
-              child: Text(
-                "${widget.poketmon.created.year}년 ${widget.poketmon.created.month}월 ${widget.poketmon.created.day}일",
-                style: const TextStyle(
-                  color: Color(
-                    0xFFAAAAAA,
-                  ),
                 ),
-              ),
-            )
-          ],
-        ),
+              )
+            ],
+          ),
+        ],)
       ),
     );
   }
