@@ -10,6 +10,7 @@ final List<String> replies = [
 ];
 
 class DetailScreen extends StatefulWidget {
+  bool isLiked = false;
   const DetailScreen({
     super.key,
     required this.poketmon,
@@ -58,9 +59,13 @@ class _DetailScreenState extends State<DetailScreen> {
                   IconButton(
                     padding: EdgeInsets.zero,
                     icon: const Icon(
-                      Icons.thumbs_up_down_outlined,
+                      isLiked ? Icons.thumb_up :Icons.thumbs_up_down_outlined,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        isLiked = !isLiked;
+                      });
+                    },
                   ),
                   Text(
                     widget.poketmon.likeCount.toString(),
