@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './detail_screen.dart';
 import '../models/poketmon.dart';
+import './upload_screen.dart';
 
 final List<Poketmon> poketmons = [
   Poketmon(
@@ -62,7 +63,12 @@ class _ListScreenState extends State<ListScreen> {
           // 업로드 화면으로 이동
           IconButton(
             icon: const Icon(Icons.camera_alt),
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (_) => const UploadScreen(),
+              );
+            },
           ),
         ],
       ),
