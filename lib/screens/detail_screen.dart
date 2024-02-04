@@ -10,7 +10,6 @@ final List<String> replies = [
 ];
 
 class DetailScreen extends StatefulWidget {
-  bool isLiked = false;
   const DetailScreen({
     super.key,
     required this.poketmon,
@@ -23,6 +22,8 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  bool isLiked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +59,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   IconButton(
                     padding: EdgeInsets.zero,
-                    icon: const Icon(
+                    icon: Icon(
                       isLiked ? Icons.thumb_up :Icons.thumbs_up_down_outlined,
                     ),
                     onPressed: () {
